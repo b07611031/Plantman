@@ -43,3 +43,23 @@ LLM  Rex+Jesse
 ## Schedule
 
 [2024 NCHC Open Hackathon Application](2024%20NCHC%20Open%20Hackathon%20Application%20113a6e4d4f9080dcab6fcb95b6521ce1.csv)
+
+## Application
+
+### Basic information
+- Name
+- Code / Application Details
+- Domain
+- Area to Focus (AI/HPC)
+
+### Project details
+- Programming Language
+- Library Used
+- GPU Programming Model
+- Frameworks and Models Used for Data
+- Algorithmic Motifs
+- Current Performance
+- Expected outcome
+- Data Source and Model Details
+- Computing Facilities
+- License
