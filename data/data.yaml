@@ -1,0 +1,7 @@
+train: /home/nas/Research_Group/Personal/Yun/Tomato/Dataset/YOLOtomato/train_20240320.txt
+val: /home/nas/Research_Group/Personal/Yun/Tomato/Dataset/YOLOtomato/test_20240320.txt
+test: /home/nas/Research_Group/Personal/Yun/Tomato/Dataset/YOLOtomato/test_20240320.txt
+
+nc: 13
+names: ['Specks', 'Ring spots', 'Yellow halo spots', 'White powder', 'Yellow spots', 'Water-soaked lesion', 'Virus', 
+'Leaf miner fly', 'Leaf miner moth', 'Two-spotted spider mite', 'Lepidoptera', 'Frostbite patches', 'Sunscald patches']
