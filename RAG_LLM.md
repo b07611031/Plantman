@@ -24,3 +24,11 @@ prompt = (
 )
 ```
 - 將output回傳給使用者
+
+
+## Model Selection:
+Embedding model: BAAI/bge-large-zh-v1.5
+Reranker model: BAAI/bge-reranker-v2-m3
+
+## Current Attempt:
+嘗試將model轉乘onnx or tensorRT來加速運行
