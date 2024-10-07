@@ -4,9 +4,7 @@ import platform
 import sys
 from pathlib import Path
 import time
-from PIL import Image
-import numpy as np
-
+import base64
 import torch
 
 FILE = Path(__file__).resolve()
@@ -81,6 +79,10 @@ def run(
     # Directories
     save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
     (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
+    
+    # Base64 Image
+    img_base64 = None
+    img_return = None
 
     '''
     # Load model
@@ -179,6 +181,12 @@ def run(
 
             # Stream results
             im0 = annotator.result()
+            img_return = im0
+            
+            # Base64 Image
+            _, buffered = cv2.imencode('.jpg', im0)
+            img_base64 = base64.b64encode(buffered).decode('utf-8')
+            
             if view_img:
                 if platform.system() == 'Linux' and p not in windows:
                     windows.append(p)
@@ -221,7 +229,7 @@ def run(
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
         
     # added
-    return pred, bbox
+    return pred, bbox, img_return
 
 
 id2label = model.names
@@ -229,7 +237,7 @@ classes_leaflet_diagnosis_model = list(id2label.values())
 
 # classes_leaf_type_classification_model,
 def inference_leaflet_diagnosis_model(image_path):
-    prediction, bbs = run(source=image_path, conf_thres=0.25, iou_thres=0.8, line_thickness=8, 
+    prediction, bbs, img= run(source=image_path, conf_thres=0.25, iou_thres=0.8, line_thickness=8, 
         save_txt=True, save_conf=True, name='linebot004', exist_ok=True)
     
     # Extract predictions
@@ -238,15 +246,16 @@ def inference_leaflet_diagnosis_model(image_path):
     
     
     
-    return class_name, bbs
+    return class_name, bbs, img
 
+#--------------Test----------------
 
-image_path = './static/default/disorders/Phytohormone_damage.jpg'
+# image_path = './static/default/disorders/Phytohormone_damage.jpg'
 # # image_path = '/home/nas/Research_Group/Personal/Yun/Tomato/Dataset/ADMtomato/Tomato Leaf/BLS_000011.jpg'
 # # image_path = './static/dragon.jpg'
 # # prediction, save_paths = inference_leaflet_diagnosis_model(image_path)
 # print(image_path)
-prediction, bbs = inference_leaflet_diagnosis_model(image_path)
+# prediction, bbs, img = inference_leaflet_diagnosis_model(image_path)
 
-print(prediction)
-print(bbs)
+# print(prediction)
+# print(bbs)

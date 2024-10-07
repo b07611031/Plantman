@@ -26,6 +26,7 @@ pycocotools = ">=2.0"
 fastapi = "*"
 uvicorn = "*"
 python-multipart = "*"
+onnxruntime = "*"
 
 [dev-packages]
 
