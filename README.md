@@ -58,15 +58,20 @@ LLM  Rex+Jesse
 - GPU Programming Model:
   
   Please specify the programming model or Mbraries you are planning to use for GPU acceleration (e.g. CUDA, CUDA Fortran, OpenACC, OpenMP, CUBLAS, cuFFT, etc.)
-- Frameworks and Models Used for Data
+- Frameworks and Models Used for Data:
+  
   Is your model similar to ResNet-50 CNN, LSTM, BERT, random forest, etc.? What optimizer and/or training method are you using? What systems have you worked on before with your data and models?
-- Algorithmic Motifs
+- Algorithmic Motifs:
+  
   Describe what types of algorithms dominate your application, especially the ones your team is targeting for acceleration.
-- Current Performance
+- Current Performance:
+  
   Describe the current performance characteristics of your application. Where does it run (CPU, GPU)? How many nodes does it scale to?
 - Expected outcome
-- Data Source and Model Details
+- Data Source and Model Details:
+  
   Details should include information about licenses, size of the data source, size of the model, current time to train, and links to any applicable information.
-- Computing Facilities
+- Computing Facilities:
+  
   Example: Desktop, local clusters, HPC centers, etc.
 - License
