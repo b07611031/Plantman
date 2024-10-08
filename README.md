@@ -55,7 +55,8 @@ LLM  Rex+Jesse
 ### Project details
 - Programming Language
 - Library Used
-- GPU Programming Model: \nPlease specify the programming model or Mbraries you are planning to use for GPU acceleration (e.g. CUDA, CUDA Fortran, OpenACC, OpenMP, CUBLAS, cuFFT, etc.)
+- GPU Programming Model:
+  Please specify the programming model or Mbraries you are planning to use for GPU acceleration (e.g. CUDA, CUDA Fortran, OpenACC, OpenMP, CUBLAS, cuFFT, etc.)
 - Frameworks and Models Used for Data
   Is your model similar to ResNet-50 CNN, LSTM, BERT, random forest, etc.? What optimizer and/or training method are you using? What systems have you worked on before with your data and models?
 - Algorithmic Motifs
