@@ -1,2 +1,14 @@
 /leaflet_diagnosis/static/*
 /leaflet_diagnosis/runs/*
+/leaflet_diagnosis/test/*
+__pycache__/
+*.py[cod]
+/utils/__pycache__/
+
+# Development
+/leaflet_diagnosis/export_onnx.py
+/leaflet_diagnosis/show_image.py
+/leaflet_diagnosis/leaflet_diagnosis_model_Allen_backup.py
+
+# 忽略所有 @eaDir 資料夾
+@eaDir/

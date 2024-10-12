@@ -1,3 +1,29 @@
+"""
+FastAPI-based YOLOv9 Image Prediction API
+
+This FastAPI application allows users to upload one or multiple images, run inference using the `inference_leaflet_diagnosis_model`, 
+and return the predictions along with bounding boxes and a URL to the processed image.
+
+Key Features:
+- Supports uploading multiple image files at once.
+- Saves uploaded images to a temporary directory, performs inference using a YOLOv9 model, and returns bounding box predictions.
+- Saves the processed image to a static directory and returns a URL for accessing the image.
+- Automatically deletes the uploaded images from the temporary location after inference to free up resources.
+- Uses the FastAPI `StaticFiles` feature to serve static images, such as the processed images after prediction.
+- Built-in support for running the FastAPI application with Uvicorn.
+
+Usage:
+1. Start the API using the command: 
+   `uvicorn <filename>:app --host 127.0.0.1 --port 8080`
+2. Upload images to the `/predict/` endpoint using POST requests with multipart form-data.
+3. Get the predictions, bounding boxes, and image URL in the response.
+
+Example Request (via cURL):
+    curl -X 'POST' 'http://127.0.0.1:8080/predict/' -F 'files=@/path/to/image1.jpg' -F 'files=@/path/to/image2.jpg'
+
+This API is suitable for integrating with web applications where users can upload images for object detection and get results in real-time.
+"""
+
 from fastapi import FastAPI, UploadFile, File
 from pathlib import Path
 import shutil
@@ -27,7 +53,7 @@ async def predict(files: List[UploadFile] = File(...)):
         temp_dir.mkdir(parents=True, exist_ok=True)
         temp_file = temp_dir / file.filename
         
-        with temp_file.open("wb") as buffer:
+        with temp_file.open("wb") as buffer:  # "wb" for write binary
             shutil.copyfileobj(file.file, buffer)
             
 
@@ -41,7 +67,7 @@ async def predict(files: List[UploadFile] = File(...)):
         # prediction = inference_leaflet_diagnosis_model(image_path)
         
         # Clean up temp file after inference
-        temp_file.unlink()
+        temp_file.unlink()  # 相當於 os.remove(temp_file) 或是系統的 rm temp_file
         
         result.append({"image_name":file.filename, "bounding_boxs": bbs, "predictions": prediction, "image_url": image_url})
         

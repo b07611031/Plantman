@@ -27,6 +27,10 @@ fastapi = "*"
 uvicorn = "*"
 python-multipart = "*"
 onnxruntime = "*"
+tritonclient = {extras = ["http"], version = "*"}
+numba = "*"
+onnx = "*"
+onnxsim = "*"
 
 [dev-packages]
 
