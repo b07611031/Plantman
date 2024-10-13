@@ -13,7 +13,11 @@
 ## LLM:
 預處理：
 - 使用llama.cpp將LLM pytorch model轉成.gguf格式，不使用quaternization
-- ollama運行LLM model
+- 使用ollama image: ollama/ollama 架設ollama docker環境
+- ollama運行LLM model, ModFile為模型的基礎參數，這邊使用與model官網相同的設定:
+```
+ollama create -f Breeze_7B_Instruct_v1_0 -f ModFile
+```
 流程：
 - 使用template 將prompt輸入model:
 ```
@@ -29,6 +33,17 @@ prompt = (
 ## Model Selection:
 Embedding model: BAAI/bge-large-zh-v1.5
 Reranker model: BAAI/bge-reranker-v2-m3
+LLM: MediaTek-Research/Breeze-7B-Instruct-v1_0
 
-## Current Attempt:
-嘗試將model轉乘onnx or tensorRT來加速運行
+## Current Attempt and speed testing:
+- 嘗試將model轉乘onnx or tensorRT來加速運行
+- 速度測試：
+  - RAG: Given 512 passages, 6.34sec/per query
+  - LLM: 
+
+## API 
+```
+headers = {'Content-Type': 'application/json'}
+payload = {'user_message': user_message}
+response = requests.post('http://pipelines.yfshih.toolmenlab.bime.ntu.edu.tw:9090/rag', headers=headers, json=payload)
+```
