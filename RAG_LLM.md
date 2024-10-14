@@ -39,7 +39,7 @@ LLM: MediaTek-Research/Breeze-7B-Instruct-v1_0
 - 嘗試將model轉乘onnx or tensorRT來加速運行
 - 速度測試：
   - RAG: Given 512 passages, 6.34sec/per query
-  - LLM: 
+  - LLM: 25.54 words/per sec
 
 ## API 
 ```
