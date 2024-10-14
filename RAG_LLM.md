@@ -45,5 +45,5 @@ LLM: MediaTek-Research/Breeze-7B-Instruct-v1_0
 ```
 headers = {'Content-Type': 'application/json'}
 payload = {'user_message': user_message}
-response = requests.post('http://pipelines.yfshih.toolmenlab.bime.ntu.edu.tw:9090/rag', headers=headers, json=payload)
+response = requests.post('http://pipelines.yfshih.toolmenlab.bime.ntu.edu.tw/rag', headers=headers, json=payload)
 ```
