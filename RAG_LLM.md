@@ -37,7 +37,7 @@
 - 使用 Embedding 模型編碼所有文本文件，並將文件向量儲存下來。
 
 ### 流程：
-1. **輸入**：使用者查詢（query）
+1. 輸入：使用者查詢（query）
 2. 使用 Embedding 模型對使用者查詢進行編碼。
 3. 計算使用者查詢向量與文件向量的餘弦相似度，選擇最相似的 top_k 文件。
 4. 將文件文本與使用者查詢包裝成一個列表：`[(document, query) for document in documents]`。
