@@ -9,6 +9,7 @@ __pycache__/
 /leaflet_diagnosis/export_onnx.py
 /leaflet_diagnosis/show_image.py
 /leaflet_diagnosis/leaflet_diagnosis_model_Allen_backup.py
+/leaflet_diagnosis/temp_uploads/*
 
 # 忽略所有 @eaDir 資料夾
 @eaDir/

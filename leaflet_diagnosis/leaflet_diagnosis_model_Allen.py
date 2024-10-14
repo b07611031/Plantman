@@ -6,6 +6,7 @@ from pathlib import Path
 import time
 import base64
 import torch
+import numpy as np
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLO root directory
@@ -22,10 +23,12 @@ from utils.plots import Annotator, colors, save_one_box
 from utils.torch_utils import select_device, smart_inference_mode
 
 
+
 # Load model
 device = '0'
 device = select_device(device)
-weights = './data/yolo-c-tomato9/weights/best.pt'
+# weights = './data/yolo-c-tomato9/weights/best.pt'
+weights = './data/yolo-c-tomato9/weights/best.onnx'
 dnn = False
 data = './data/data.yaml'
 half = False
@@ -82,7 +85,6 @@ def run(
     
     # Base64 Image
     img_base64 = None
-    img_return = None
 
     '''
     # Load model
@@ -122,7 +124,7 @@ def run(
         with dt[1]:
             visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
             pred = model(im, augment=augment, visualize=visualize)
-            pred = pred[0][1]
+            pred = pred[0]
 
         # NMS
         with dt[2]:
@@ -181,11 +183,20 @@ def run(
 
             # Stream results
             im0 = annotator.result()
-            img_return = im0
+            
+            def compress_and_convert_to_base64(image_np: np.ndarray, quality: int = 90) -> str:
+                # 壓縮圖片，使用 JPG 格式並設置壓縮品質
+                encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), quality]  # 壓縮品質 (1-100)，100 表示最高品質
+                _, buffer = cv2.imencode('.jpg', image_np, encode_param)  # 壓縮成 JPG 格式
+                
+                # 將壓縮後的圖片轉換成 base64
+                image_base64 = base64.b64encode(buffer).decode('utf-8')
+                
+                return image_base64
             
             # Base64 Image
-            _, buffered = cv2.imencode('.jpg', im0)
-            img_base64 = base64.b64encode(buffered).decode('utf-8')
+            img_base64 = compress_and_convert_to_base64(im0, quality=40)  # 壓縮品質 40
+            
             
             if view_img:
                 if platform.system() == 'Linux' and p not in windows:
@@ -229,7 +240,7 @@ def run(
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
         
     # added
-    return pred, bbox, img_return
+    return pred, bbox, img_base64
 
 
 id2label = model.names
