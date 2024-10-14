@@ -4,24 +4,6 @@ FastAPI-based YOLOv9 Image Prediction API
 This FastAPI application allows users to upload one or multiple images, run inference using the `inference_leaflet_diagnosis_model`, 
 and return the predictions along with bounding boxes and a URL to the processed image.
 
-Key Features:
-- Supports uploading multiple image files at once.
-- Saves uploaded images to a temporary directory, performs inference using a YOLOv9 model, and returns bounding box predictions.
-- Saves the processed image to a static directory and returns a URL for accessing the image.
-- Automatically deletes the uploaded images from the temporary location after inference to free up resources.
-- Uses the FastAPI `StaticFiles` feature to serve static images, such as the processed images after prediction.
-- Built-in support for running the FastAPI application with Uvicorn.
-
-Usage:
-1. Start the API using the command: 
-   `uvicorn <filename>:app --host 127.0.0.1 --port 8080`
-2. Upload images to the `/predict/` endpoint using POST requests with multipart form-data.
-3. Get the predictions, bounding boxes, and image URL in the response.
-
-Example Request (via cURL):
-    curl -X 'POST' 'http://127.0.0.1:8080/predict/' -F 'files=@/path/to/image1.jpg' -F 'files=@/path/to/image2.jpg'
-
-This API is suitable for integrating with web applications where users can upload images for object detection and get results in real-time.
 """
 
 from fastapi import FastAPI, UploadFile, File
@@ -30,7 +12,7 @@ import shutil
 from typing import List
 from PIL import Image
 import numpy as np
-from leaflet_diagnosis_model_Allen import inference_leaflet_diagnosis_model  # Import your model inference function
+from leaflet_diagnosis_model import inference_leaflet_diagnosis_model  # Import your model inference function
 from cv2 import imwrite
 
 import os
