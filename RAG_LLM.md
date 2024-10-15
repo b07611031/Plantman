@@ -7,7 +7,8 @@
 - Pytorch 2.4.0+（支援GPU）
 - CUDA 12.1+
 - Torchvision
-
+- torch 2.4.0+cu121
+- ollama 0.2.6
 ## RAG 設置：
 
 ### 環境準備：
