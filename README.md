@@ -1,77 +1,45 @@
-# Teamspace Home
+# Plantman
 
-Application Deadline: October 15, 2024
+## 簡介
 
-# 引導
+**Plantman** 結合了影像辨識與自然語言生成式人工智慧，提供自動化的病蟲害辨識和即時的農民諮詢服務，旨在解決農業病蟲害辨識與防治的挑戰。
 
-## Welcome
+系統由 LINE 聊天機器人、植物葉片病蟲害辨識模型和農業病蟲害諮詢系統組成。使用者可透過 Plantman 的 LINE 聊天機器人上傳葉片影像，系統將自動辨識葉片上可能存在的病斑及其種類，並提供辨識結果和相關的防治方法。此外，使用者還可以透過文字諮詢 Plantman，獲取農業病蟲害相關的知識，透過問答形式全面了解病蟲害與生理障礙的防治步驟與情況。
 
-我們的目標，就是成功報名並參賽[NCHC Open Hachathon](https://www.openhackathons.org/s/siteevent/a0C5e000008dX2GEAU/se000298?linkId=100000291870299)，此黑克松是由Nvidia和國家高速網路與計算中心共同舉辦的！
+## 團隊介紹
 
-以下是我們的主題以及相關報名資訊和連結：
+本團隊 **Plantmen** 來自國立臺灣大學生物機電工程學系的機器學習與機器視覺實驗室。我們致力於將工程知識導入生物相關產業以解決各種難題，其中智慧農業領域是本實驗室主要研究的方向。我們將 AI、機器視覺和自然語言技術應用於農業，以應對農業現場高多樣性與變異性的挑戰。
 
-- 主題：AI番茄病蟲害與生理障礙辨識與農業智慧諮詢系統
-- 報名截止日期：10 月 15 日（星期二）
-- 活動日期：11 月的每個星期三（前三次線上，最後一次實體在新竹）
-- 事前準備：Objective + Performance Evaluation Details
-- 網址：[https://www.openhackathons.org/s/siteevent/a0C5e000008dX2GEAU/se000298?linkId=100000291870299](https://www.openhackathons.org/s/siteevent/a0C5e000008dX2GEAU/se000298?linkId=100000291870299)
+## 系統架構與技術細節
 
-## Workload
+Plantman 包含三個主要模組：
 
-Version 1 deadline: 10/8 Tue. 12:00 noon
+1. **控制器**：使用 Python 與 Flask 開發，用於與即時通訊軟體平台 LINE（前端）進行溝通，並控制辨識邏輯及各模型間的資料流。
 
-### Intro
+2. **影像物件偵測模型**：負責定位和分類葉片影像上的病斑，採用 YOLOv9-C 作為影像辨識模型。
 
-Yun 先寫一點點 大家補齊ALL
+3. **自然語言處理模型**：結合擷取增強生成（RAG）和大型語言模型（LLM），以產生專業的病蟲害防治資訊。
+   - **RAG**：使用 Reranker Based RAG，Embedding 模型採用 `bge-large-zh-v1.5`，Reranker 模型為 `bge-reranker-v2-m3`。
+   - **LLM**：使用 `Breeze-7B-Instruct-v1_0`。
 
-### MM (Code + 文件)
+## 資料來源與模型詳細資訊
 
-系統架構 林雲
+| 組件                                   | 模型大小   | 授權               |
+|----------------------------------------|-----------|--------------------|
+| **影像辨識模型 YOLOv9-C**              | 25.3M     | GPL-3.0 授權       |
+| **Embedding 模型 bge-large-zh-v1.5**   | 326M      | MIT 授權           |
+| **Reranker 模型 bge-reranker-v2-m3**   | 568M      | Apache 2.0 授權    |
+| **LLM 模型 Breeze-7B Breeze-7B-Instruct-v1_0**   | 7.49B     | Apache 2.0 授權    |
 
-控制器 林雲
+## 硬體環境
 
-影像處理 Allen
-
-Reranker Rex+Jesse
-
-LLM  Rex+Jesse
-
-### Discussion
-
-予恩
-
-## Schedule
-
-[2024 NCHC Open Hackathon Application](2024%20NCHC%20Open%20Hackathon%20Application%20113a6e4d4f9080dcab6fcb95b6521ce1.csv)
-
-## Application
-
-### Basic information
-- Name
-- Code / Application Details
-- Domain
-- Area to Focus (AI/HPC)
-
-### Project details
-- Programming Language
-- Library Used
-- GPU Programming Model:
-  
-  Please specify the programming model or Mbraries you are planning to use for GPU acceleration (e.g. CUDA, CUDA Fortran, OpenACC, OpenMP, CUBLAS, cuFFT, etc.)
-- Frameworks and Models Used for Data:
-  
-  Is your model similar to ResNet-50 CNN, LSTM, BERT, random forest, etc.? What optimizer and/or training method are you using? What systems have you worked on before with your data and models?
-- Algorithmic Motifs:
-  
-  Describe what types of algorithms dominate your application, especially the ones your team is targeting for acceleration.
-- Current Performance:
-  
-  Describe the current performance characteristics of your application. Where does it run (CPU, GPU)? How many nodes does it scale to?
-- Expected outcome
-- Data Source and Model Details:
-  
-  Details should include information about licenses, size of the data source, size of the model, current time to train, and links to any applicable information.
-- Computing Facilities:
-  
-  Example: Desktop, local clusters, HPC centers, etc.
-- License
+- **GPU**：
+  - NVIDIA GeForce RTX 2080 Ti（11,264 MiB 顯存）×2
+  - NVIDIA GeForce A6000（49,140 MiB 顯存）×2
+- **CPU**：
+  - Intel Xeon CPU E5-2640 v3 @ 2.60GHz（16 核心）
+- **記憶體（RAM）**：
+  - Samsung M393A4K40CB2-CTD 32GB ×8
+  - **總記憶體容量**：256 GB
+- **磁碟儲存**：
+  - **總容量**：4.64 TB

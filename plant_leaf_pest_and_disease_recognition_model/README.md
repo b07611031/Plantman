@@ -1,4 +1,8 @@
-# CV (Leaf diagnosis)
+# Plant Leaf Pest and Disease Recognition Model
+
+## 模型選擇：
+
+影像物件偵測模型：finetuned yolov9
 
 ## 安裝要求
 請確保已安裝以下內容：
@@ -9,10 +13,10 @@
 - Torchvision 0.19.1+
 - OpenCV 4.10.0+
 
-
-## 模型選擇：
-
-影像辨識模型：finetuned yolov9
+## 目前嘗試與速度測試
+- 嘗試將模型轉換為 ONNX 或 TensorRT ，並結合Triton service來加速運行。
+- 速度測試結果：
+  Inference times average around 50 milliseconds per image when using ONNX on one GPU (NVIDIA GeForce A6000). While the GPU utilization can reach nearly 100% during the warm-up phase, in the detection inference phase, only one API call can be processed at a time, and each call only utilizes 20% of the GPU, leaving 80% of the GPU underutilized. The model's computation time could be significantly reduced if the GPU could be utilized more efficiently.
 
 ## API service 設置：
 

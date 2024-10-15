@@ -1,4 +1,9 @@
-# RAG + LLM
+# Agricultural Pest and Disease Consultation System
+
+## 模型選擇 (RAG + LLM)
+- Embedding 模型：`BAAI/bge-large-zh-v1.5`
+- Reranker 模型：`BAAI/bge-reranker-v2-m3`
+- LLM 模型：`MediaTek-Research/Breeze-7B-Instruct-v1_0`
 
 ## 安裝要求
 請確保已安裝以下內容：
@@ -62,11 +67,6 @@
    )
    ```
 2. 將模型的輸出回傳給使用者。
-
-## 模型選擇
-- Embedding 模型：`BAAI/bge-large-zh-v1.5`
-- Reranker 模型：`BAAI/bge-reranker-v2-m3`
-- LLM 模型：`MediaTek-Research/Breeze-7B-Instruct-v1_0`
 
 ## 目前嘗試與速度測試
 - 嘗試將模型轉換為 ONNX 或 TensorRT 來加速運行。
