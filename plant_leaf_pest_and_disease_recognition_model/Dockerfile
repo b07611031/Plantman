@@ -12,7 +12,9 @@ COPY utils /app/utils
 COPY data /app/data
 
 # 更新並安裝必要的系統依賴
-RUN apt-get update -y && apt-get install -y \
+RUN apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive TZ=Asia/Taipei \
+    apt-get install -y \
     libsm6 \
     libxrender1 \
     libxext6 \
