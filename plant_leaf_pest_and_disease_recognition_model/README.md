@@ -108,3 +108,63 @@ with open(image_path, 'rb') as img:
         img.save(filename)
         print(f"Processed image saved as {filename}")
 ```
+
+# Docker 使用說明：b07611031/plantman_cv:0.0.0
+
+## Dockerfile 概述
+
+```
+# 使用 NVIDIA CUDA 11.2 及 cuDNN 8 的 Ubuntu 18.04 基底映像
+FROM nvidia/cuda:11.2.2-cudnn8-runtime-ubuntu18.04
+
+# 設定工作目錄
+WORKDIR /app
+
+# 將本地的所有檔案加入到容器內的 /app 目錄
+ADD . /app
+
+# 使用 build_env.sh 檔案來安裝環境與所需的套件
+RUN sh build_env.sh
+
+# 設定 Python 輸出為 UTF-8 編碼
+ENV PYTHONIOENCODING=utf-8
+
+# 將 5000 埠號暴露出來
+EXPOSE 5000
+
+# 設定容器啟動時執行的指令
+CMD ["python3", "app.py"]
+```
+
+## 使用步驟
+
+### 1. 建立 Docker 映像檔
+
+使用以下指令來根據 Dockerfile 建立映像檔：
+
+```bash
+docker build -t b07611031/plantman_cv:0.0.0 .
+```
+
+### 2. 執行容器
+
+啟動容器並將容器的 5000 埠映射到主機的 5000 埠，以便從外部訪問應用程式：
+
+```bash
+docker run -p 5000:5000 --gpus all b07611031/plantman_cv:0.0.0
+```
+
+### 參數說明
+
+- **`p 5000:5000`**：將主機的 5000 埠映射到容器內部的 5000 埠，這樣可以通過 `http://localhost:5000` 訪問應用程式。
+- **`-gpus all`**：讓容器內的應用程式使用所有 GPU，適用於需要 CUDA 支援的深度學習或電腦視覺應用。
+
+### 3. 訪問應用程式
+
+啟動容器後，可以通過瀏覽器訪問以下 URL 來查看應用程式：
+
+```
+http://localhost:5000
+```
+
+若映像檔和應用程式配置正確，應該可以在此 URL 上正常運行應用程式。
