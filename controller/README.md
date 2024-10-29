@@ -54,6 +54,9 @@ COPY . /app
 # Add the config.ini file from a URL or local file
 ADD config.ini /app
 
+# Expose port 5000 for external access
+EXPOSE 5000
+
 # Set the default command to start the application
 CMD ["python", "LINEBOT_v3.py"]
 
