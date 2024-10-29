@@ -62,7 +62,7 @@ CMD ["python", "LINEBOT_v3.py"]
 
 ```
 *config.ini*
-```toml
+```
 [line-developer]
 # channel access token
 api = <your linebot token>
