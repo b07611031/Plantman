@@ -64,8 +64,6 @@ CMD ["python", "LINEBOT_v3.py"]
 To run the container and map port `5000` on the container to port `5000` on the host, use the following command:
 
 ```bash
-bash
-複製程式碼
 docker run -p 5000:5000 b07611031/plantman_controller:0.0.0
 
 ```
