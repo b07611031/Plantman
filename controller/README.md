@@ -61,7 +61,27 @@ EXPOSE 5000
 CMD ["python", "LINEBOT_v3.py"]
 
 ```
+*config.ini*
+```toml
+[line-developer]
+# channel access token
+api = <your linebot token>
 
+# channel secret
+handler = <your linebot secret>
+
+# channel https link
+url_basis = <your link>/static
+# url_basis example
+url_basis = https://plantman.toolmenlab.bime.ntu.edu.tw/static/
+
+[api-url]
+# diagnosis model link
+leaflet_diagnosis_model = http://cv.plantman.toolmenlab.bime.ntu.edu.tw/predict/
+
+# RAG link
+rag_reranker_llm = http://pipelines.yfshih.toolmenlab.bime.ntu.edu.tw/rag
+```
 ### Running the Container
 
 To run the container and map port `5000` on the container to port `5000` on the host, use the following command:
